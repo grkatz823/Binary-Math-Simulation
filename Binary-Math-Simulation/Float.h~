@@ -1,0 +1,21 @@
+/**Greg Katz
+Final Project cs324
+Simulating IEEE Floating Point
+*/
+#ifndef FLOAT_H
+#define FLOAT_H
+#include <stack>
+#include <string>
+using namespace std;
+
+class Float{
+	
+	public:
+	Float();
+
+
+
+	private:
+	int num;
+	
+};

@@ -1,0 +1,19 @@
+#include <string>
+#include <stack>
+#include <cstdlib>
+#include <iostream>
+#include "FinalProjMult.h"
+using namespace std;
+/**
+ *
+ * @author grkatz
+ */
+    
+    /** Creates a new instance of FinalProjMult */
+FinalProjMult::FinalProjMult(){}
+
+//Public Methods
+int FinalProjMult::convertToDecimalInt(string str){
+   while(str.length()>0)
+   {
+				

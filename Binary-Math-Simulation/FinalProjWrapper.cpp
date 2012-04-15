@@ -1,0 +1,71 @@
+//Greg Katz
+#include <iostream>
+#include <string>
+#include "FinalProjMain.h"
+// Program to run candy machine
+// Inheritance tests are not included, but the set up should be correct,
+// based on the UML diagram posted online.
+
+
+using namespace std;
+
+/*Wrapper function that calls the Final Project FinalProjMain with inputs already placed in
+and, with the proper inputs, can be used to access the interactive menu to create you own tests*/
+
+int main() {
+	char any;
+	cout<<"Would you like to create you own tests?"<<endl; 
+	cout<<"(y to create own tests, any other input will take you to my tests): ";
+	cin>>any;
+	if(any == 'y'){
+	FinalProjMain cm = FinalProjMain(false,false,false,"","",0,0);}
+	else{
+	FinalProjMain cm = FinalProjMain(true,false,false,"10","10",10,0);
+	cout<<"next test? (input anything and hit enter)";
+	cin>>any;
+	cm = FinalProjMain(true,false,false,"3","-25",10,0);
+	cout<<"next test? (input anything and hit enter)";
+	cin>>any;
+	cm = FinalProjMain(true,false,false,"-15","6",10,0);
+	cout<<"next test? (input anything and hit enter)";
+	cin>>any;
+	cm = FinalProjMain(true,false,false,"-15","-10",10,0);
+	cout<<"next test? (input anything and hit enter)";
+	cin>>any;
+	cm = FinalProjMain(true,false,false,"1A","2",16,0);
+	cout<<"next test? (input anything and hit enter)";
+	cin>>any;
+	cm = FinalProjMain(true,false,false,"11","11",2,0);
+	cout<<"next test? (input anything and hit enter)";
+	cin>>any;
+	cm = FinalProjMain(false,true,false,"10","10",10,0);
+	cout<<"next test? (input anything and hit enter)";
+	cin>>any;
+	cm = FinalProjMain(false,true,false,"25","12",10,0);
+	cout<<"next test? (input anything and hit enter)";
+	cin>>any;
+	cm = FinalProjMain(false,true,false,"25","-12",10,0);
+	cout<<"next test? (input anything and hit enter)";
+	cin>>any;
+	cm = FinalProjMain(false,true,false,"1A","10",16,0);
+	cout<<"next test? (input anything and hit enter)";
+	cin>>any;
+	cm = FinalProjMain(false,true,false,"111","101",2,0);
+	cout<<"next test? (input anything and hit enter)";
+	cin>>any;
+	cm = FinalProjMain(false,false,true,"-255.75","",10,0);
+	cout<<"next test? (input anything and hit enter)";
+	cin>>any;
+	cm = FinalProjMain(false,false,true,"-111.1010","",2,0);
+	cout<<"next test? (input anything and hit enter)";
+	cin>>any;
+	cm = FinalProjMain(false,false,true,"0","",10,0);
+	cout<<"next test? (input anything and hit enter)";
+	cin>>any;
+	cm = FinalProjMain(false,false,true,"F","",16,0);
+	cout<<"would you like to create you own? (y to make your own): ";
+	cin>>any;
+	if(any == 'y'){
+	FinalProjMain cm = FinalProjMain(false,false,false,"","",0,0);}}
+	return 0;
+}

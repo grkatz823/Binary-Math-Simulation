@@ -1,0 +1,22 @@
+/**Greg Katz
+Final Project cs324
+Simulating Binary Division
+*/
+
+#ifndef DIV_H
+#define DIV_H
+#include <stack>
+#include <string>
+using namespace std;
+
+class Div{
+	
+	public:
+	Div();
+
+
+
+	private:
+	int num;
+	
+};

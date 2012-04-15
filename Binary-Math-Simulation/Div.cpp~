@@ -1,0 +1,43 @@
+#include <string>
+#include <stack>
+#include <cstdlib>
+#include <iostream>
+#include "Div.h"
+using namespace std;
+/**
+ *
+ * @author grkatz
+ */
+    
+    /** Creates a new instance of Div */
+Div::Div(){}
+
+//Public Methods
+int Div::convertToDecimalInt(string str){
+   char temp;
+   int num;
+   int base = 1;
+   int acc = 0;
+   for(i=str.length();i>0;i--)
+   {
+	temp = str.at(i-1);
+	if(temp=='A'){
+	num = 10;}
+	else if(temp == 'B'){
+	num = 11;}
+	else if(temp == 'C'){
+	num = 12;}
+	else if(temp == 'D'){
+	num = 13}
+	else if(temp == 'E'){
+	num = 14}
+	else if(temp == 'F'){
+	num = 15}
+	else{
+	num = temp - '0';
+	}
+	acc += num * base;
+	base = base * 10;
+   }
+return acc;
+}			

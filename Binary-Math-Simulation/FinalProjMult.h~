@@ -1,0 +1,19 @@
+/**Greg Katz
+Final Project cs324
+Simulating Binary Multiplication
+*/
+#include <stack>
+#include <string>
+using namespace std;
+
+class FinalProjMult
+{
+	public:
+	FinalProjMult();
+	int convertToDecimalInt(string str);
+	string convertToBin(int num, int base);
+
+
+	private:
+	int num;
+	

@@ -1,0 +1,376 @@
+#include <string>
+#include <stack>
+#include <sstream>
+#include <cstdlib>
+#include <iostream>
+#include "Mult.h"
+using namespace std;
+/**
+ *
+ * @author grkatz
+ */
+    
+    /** Creates a new instance of Mult */
+Mult::Mult(){}
+
+//Public Methods
+/*Iterates through a string, taking each character and converting it to
+a double, multiplies it by its base, then adjusts the accumulator
+and base accordingly*/
+double Mult::convertToDecimalInt(string str,double base){
+   char temp;
+   double num;
+   double curr = 1;
+   double acc = 0;
+   for(int i=str.length();i>0;i--)
+   {
+	temp = str.at(i-1);
+	if(temp=='A'){
+	num = 10;}
+	else if(temp == 'B'){
+	num = 11;}
+	else if(temp == 'C'){
+	num = 12;}
+	else if(temp == 'D'){
+	num = 13;}
+	else if(temp == 'E'){
+	num = 14;}
+	else if(temp == 'F'){
+	num = 15;}
+	else if(temp == '-'){
+	num = 0;
+	acc = acc * (-1);}
+	else{
+	num = temp - '0';
+	}
+	acc += num * curr;
+	curr = curr * base;
+   }
+return acc;
+}	
+
+/*Converts a double to a binary string by taking its remainder
+when divided by two and replacing it with its character then
+dividing the number by two and using that number for the next
+time through*/
+
+string Mult::convertToBin(double num){
+   string acc = "";
+   double temp;
+   if(num == 0){
+	acc = "0";}
+   else{
+	while(num != 0){
+	temp = (int)num%2;
+	num = (int)num/2;
+	if(temp == 0){
+		acc = '0' + acc;}
+	else{
+		acc = '1' + acc;
+		}
+     	}
+    }
+   return acc;
+}
+
+/*Takes two strings and makes the first string, if shorter
+than the second, equal in length to the second string*/ 
+
+string Mult::evenNum(string str1,string str2){
+   string acc = str1;
+   while(acc.length() < str2.length()){
+	acc = '0' + acc;
+	}
+   return acc;
+}
+
+//Checks if a double is positive
+bool Mult::findIfPos(double num){
+ bool neg = true;
+ if(num<0){
+	neg = false;}
+  else{}
+  return neg;}
+
+/*Gets the twos complement of a string if the number
+is negative*/
+string Mult::getTwosComp(string str,bool positive){
+   if(positive == false){
+	string temp = "";
+	bool one = false;
+	for(int i = str.length();i>0;i--){
+	  char tester = str.at(i-1);
+	   if(tester == '1'){
+		if(one == false){
+		      	one = true;
+			temp = '1' + temp;}
+		else{
+			temp = '0' + temp;}
+	   }else{
+		if(one == false){
+			temp = '0' + temp;}
+		else{
+			temp = '1' + temp;}
+			}
+   		}
+	return temp;
+	}else{
+	return str;}
+}	
+	
+//Creates a blank string of length equal to that of binNum   
+string Mult::getA(string binNum){
+   string blank = "";
+   for(double i = 0; i<binNum.length();i++){
+	blank += '0';}
+   return blank;}
+
+/*Checks after binary multiplication whether the number
+is negative or positive and gets its base 10 value*/
+double Mult::getNumericAnswer(string str1){
+	char temp;
+	double flag = 0;
+	double acc = 0;
+	double curr = 1;
+	string used;
+	double num;
+	if(str1.at(0) == '1'){
+	used = getTwosComp(str1,false);
+	flag = 1;}
+	else{
+	used = str1;}
+
+	for(int i = used.length()-1; i >= 0; i--){
+		temp = used.at(i);
+		num = temp -'0';
+		acc += num * curr;
+		curr = curr * 2;}
+
+	if(flag == 1){
+	acc = acc * -1;}
+
+return acc;
+}
+
+//Translates the binary division answer to base 10
+double Mult::getNumericDivAnswer(string str1){
+	char temp;
+	double acc = 0;
+	double curr = 1;
+	double num;
+
+	for(int i = str1.length()-1; i >= 0; i--){
+		temp = str1.at(i);
+		num = temp -'0';
+		acc += num * curr;
+		curr = curr * 2;}
+
+return acc;
+}
+//Converts the number to its original base
+string Mult::getOrigAnswer(double num, double base){
+	double remain;
+	char temp;
+	double flag = 0;
+	string acc = "";
+   if(num < 0){
+	flag = 1;
+	num = num * -1;}
+	
+   if(num == 0){
+	acc = "0";
+   }else{
+	while(num != 0){
+	remain = (int)num% (int)base;
+	num = (int)num/(int)base;
+		if(remain == 10){
+		temp = 'A';}
+		else if(remain == 11){
+		temp = 'B';}
+		else if(remain == 12){
+		temp = 'C';}
+		else if(remain == 13){
+		temp = 'D';}
+		else if(remain == 14){
+		temp = 'E';}
+		else if(remain == 15){
+		temp = 'F';}		
+		else if(remain == 9){
+		temp = '9';}
+		else if(remain == 8){
+		temp = '8';}
+		else if(remain == 7){
+		temp = '7';}
+		else if(remain == 6){
+		temp = '6';}
+		else if(remain == 5){
+		temp = '5';}
+		else if(remain == 4){
+		temp = '4';}
+		else if(remain == 3){
+		temp = '3';}
+		else if(remain == 2){
+		temp = '2';}
+		else if(remain == 1){
+		temp = '1';}
+		else{
+		temp = '0';}
+		acc = temp + acc;
+			}
+		}
+
+   if(flag == 1){
+	acc = '-' + acc;}
+	
+	return acc;
+}
+
+//Multiplication only method
+/*Simulates one step of binary multiplication*/
+string Mult::stepThroughMult(string binNum1,string binNum2,string BlankString,char Q){
+	string temp = "";
+	char First = binNum1.at(binNum1.length()-1);
+	if((First == '0' && Q == '0') || (First == '1') && (Q == '1')){
+		char Second = BlankString.at(0);
+		if(Second == '0'){
+			temp = '0' + BlankString.append(binNum1);}
+		else{
+			temp = '1' + BlankString.append(binNum1);}
+	}else if(First == '0' && Q == '1'){
+		BlankString = binaryAdd(binNum2, BlankString);
+		char Second = BlankString.at(0);
+		if(Second == '0'){
+			temp = '0' + BlankString.append(binNum1);}
+		else{
+			temp = '1' + BlankString.append(binNum1);}
+	}else{
+		BlankString = binaryAdd(getTwosComp(binNum2,false),BlankString);
+				char Second = BlankString.at(0);
+		if(Second == '0'){
+			temp = '0' + BlankString.append(binNum1);}
+		else{
+			temp = '1' + BlankString.append(binNum1);}
+		}
+	return temp;
+}
+
+
+//Simulates one step of binary division
+string Mult::stepThroughDiv(string binNum1, string binNum2, string BlankString){
+	string temp = BlankString.substr(1,BlankString.length()-1).append(binNum1) + '0';
+	string tempBlank = temp.substr(0,temp.length()/2);
+	string tempBin1 = temp.substr(temp.length()/2,temp.length()/2);
+	tempBlank = binaryAdd(getTwosComp(binNum2,false),tempBlank);
+	
+	if(tempBlank.at(0) == '1'){
+	tempBlank = binaryAdd(binNum2,tempBlank);
+	}else{
+	tempBin1[tempBin1.length()-1] = '1';}
+	temp = tempBlank + tempBin1;
+	return temp;
+	}
+
+double Mult::makePositive(double number,bool positive){
+	if(positive == false){
+		number *= -1;}
+	return number;}
+
+//Removes the part of string before the decimal
+string Mult::getNumBefore(string num){
+	string temp = "";
+	int i = 0;
+	while(i<num.length() && num.at(i) != '.'){
+		temp += num.at(i);
+		i++;}
+	if(temp == ""){
+	temp += '0';}
+	return temp;}
+
+//separates the part of the string after the decimal
+string Mult::getNumAfter(string num){
+	string temp = "";
+	char flag = '0';
+
+	for(int i = 0; i<num.length();i++){
+		if(num.at(i) == '.'){
+			flag = '1';}
+		else{
+			if(flag=='1'){
+			temp += num.at(i);}}}
+
+	if(temp == ""){
+	temp += '0';}
+	return temp;}	
+
+/*Converts a decimal to base 10 from its original base
+which means it multiplies the base by the reciprocal of
+the original base after each iteration backwards through the string*/
+double Mult::convertDecimalToBase10(string str,double base){
+   char temp;
+   double num;
+   double curr = 1;
+   double acc = 0;
+   for(int i=0;i<str.length();i++)
+   {
+	temp = str.at(i);
+	if(temp=='A'){
+	num = 10;}
+	else if(temp == 'B'){
+	num = 11;}
+	else if(temp == 'C'){
+	num = 12;}
+	else if(temp == 'D'){
+	num = 13;}
+	else if(temp == 'E'){
+	num = 14;}
+	else if(temp == 'F'){
+	num = 15;}
+	else{
+	num = temp - '0';}
+	curr = curr * (1/base);
+	acc += num * curr;
+	
+    }
+return acc;
+}
+
+string Mult::convertDecFloatToBin(double smallFloat){
+	string any = "";
+	while(smallFloat != 0 && any.length()<23){
+		smallFloat = smallFloat * 2;
+		if(smallFloat>=1){
+		  any += '1';
+		  smallFloat = smallFloat - 1;}
+		else{
+		  any += '0';}}
+	any += '0';
+	return any;}
+
+
+//private methods;
+//Simulates binary addition
+string Mult::binaryAdd(string str1, string str2){
+	string temp = "";
+	char carryBit = '0';
+	for(int i = str1.length()-1; i>=0; i--){
+		char A = str1.at(i);
+		char B = str2.at(i);
+		if(carryBit == '0' && A == '0' && B == '0'){
+			temp = '0' + temp; 
+			carryBit = '0';}
+		else if(carryBit == '1' && A == '1' && B == '1'){
+			temp = '1' + temp;
+			carryBit = '1';}
+		else if((carryBit == '1' && A == '0' && B == '0') ||
+			(carryBit == '0' && A == '1' && B == '0') ||
+			(carryBit == '0' && A == '0' && B == '1')){
+			temp = '1' + temp;
+			carryBit = '0';}
+		else{
+			temp = '0' + temp;
+			carryBit = '1';}
+		}
+	return temp;
+}
+
+			

@@ -1,0 +1,41 @@
+#ifndef FINAL_PROJ_MAIN_H
+#define	FINAL_PROJ_MAIN_H
+#include "Mult.h"
+#include <stack>
+#include <string>
+using namespace std;
+
+class FinalProjMain{
+
+	public:
+	   FinalProjMain(bool isTrue1,bool isTrue2,bool isTrue3,string num1,string num2,double base,double exponent);
+
+	private:
+		Mult m;
+		string num1;
+		string num2;
+		double base;
+		char choice;
+		string contin;
+		string binNum1;
+		string binNum2;
+		string BlankString;
+		string fullAnswer;
+		double decNum1;
+		double decNum2;
+		double decNumFloat;
+		double smallFloat2;
+		double exponent;
+		string floatExponent;
+		double decAnswer;
+		double decAnswer2;
+		string origAnswer;
+		string origAnswer2;
+		bool negOne;
+		bool negTwo;
+		string numBig;
+		string numSmall;
+
+};
+
+#endif //FinalProjMain
